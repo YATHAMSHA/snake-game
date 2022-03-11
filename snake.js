@@ -51,3 +51,32 @@ function removeClass( elem, className ) {
     elem.className = newClass.replace( /^\s+|\s+$/g, '' );
   }
 };
+            
+            
+function toggleClass( elem, className ) {
+  var newClass = ' ' + elem.className.replace( /[\t\r\n]/g, ' ' ) + ' ';
+  if( hasClass(elem, className ) ) {
+    while( newClass.indexOf( ' ' + className + ' ' ) >= 0 ) {
+      newClass = newClass.replace( ' ' + className + ' ' , ' ' );
+    }
+    elem.className = newClass.replace( /^\s+|\s+$/g, '' );
+  } else {
+    elem.className += ' ' + className;
+    
+    
+g = {};
+
+(function(){ 'use strict';
+            
+g.m = Math;
+g.mathProps = 'E LN10 LN2 LOG2E LOG10E PI SQRT1_2 SQRT2 abs acos asin atan ceil cos exp floor log round sin sqrt tan atan2 pow max min'.split( ' ' );
+for ( var i = 0; i < g.mathProps.length; i++ ) {
+  g[ g.mathProps[ i ] ] = g.m[ g.mathProps[ i ] ];
+}
+g.m.TWO_PI = g.m.PI * 2;
+  }
+};
+
+})();
+
+            
