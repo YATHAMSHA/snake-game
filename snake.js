@@ -78,5 +78,24 @@ g.m.TWO_PI = g.m.PI * 2;
 };
 
 })();
+            
+            g.isset = function( prop ) {
+  return typeof prop != 'undefined';
+};
+
+g.log = function() {
+  if( g.isset( g.config ) && g.config.debug && window.console ){
+    console.log( Array.prototype.slice.call( arguments ) );
+  }
+};
+
+})();
+
+(function(){ 'use strict';
+
+g.Group = function() {
+  this.collection = [];
+  this.length = 0;
+};
 
             
