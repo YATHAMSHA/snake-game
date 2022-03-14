@@ -133,4 +133,17 @@ g.Group.prototype.each = function( action, asc ) {
 
 })();
 
+(function(){ 'use strict';
+
+g.util = {};
+
+            g.util.rand = function( min, max ) {
+  return g.m.random() * ( max - min ) + min;
+};
+
+g.util.randInt = function( min, max ) {
+  return g.m.floor( g.m.random() * ( max - min + 1) ) + min;
+};
+
+}());
             
