@@ -276,6 +276,44 @@ g.BoardTile = function( opt ) {
   }
   this.updateDimensions();
 };
+            
+            g.BoardTile.prototype.update = function() {
+  for( var k in this.classes ) {
+    if( this.classes[ k ] ) {
+      this.classes[ k ]--;
+    }
+  }
+
+  if( this.parentState.food.tile.col == this.col || this.parentState.food.tile.row == this.row ) {
+    this.classes.path = 1;
+    if( this.col < this.parentState.food.tile.col ) {
+      this.classes.right = 1;
+    } else {
+      this.classes.right = 0;
+    }
+    if( this.col > this.parentState.food.tile.col ) {
+      this.classes.left = 1;
+    } else {
+      this.classes.left = 0;
+    }
+    if( this.row > this.parentState.food.tile.row ) {
+      this.classes.up = 1;
+    } else {
+      this.classes.up = 0;
+    }
+    if( this.row < this.parentState.food.tile.row ) {
+      this.classes.down = 1;
+    } else {
+      this.classes.down = 0;
+    }
+  } else {
+    this.classes.path = 0;
+  }
+
+  if( this.parentState.food.eaten ) {
+    this.classes.path = 0;
+  }
+};
 
 
 
