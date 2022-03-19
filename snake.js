@@ -220,6 +220,62 @@ g.Grid.prototype.set = function( x, y, val ) {
 };
 
 })();
+(function(){ 'use strict';
+
+g.Grid = function( cols, rows ) {
+  this.cols = cols;
+  this.rows = rows;
+  this.tiles = [];
+  for( var x = 0; x < cols; x++ ) {
+    this.tiles[ x ] = [];
+    for( var y = 0; y < rows; y++ ) {
+      this.tiles[ x ].push( 'empty' );
+    }
+  }
+};
+
+g.Grid.prototype.get = function( x, y ) {
+  return this.tiles[ x ][ y ];
+};
+
+g.Grid.prototype.set = function( x, y, val ) {
+  this.tiles[ x ][ y ] = val;
+};
+
+})();
+
+/*================================================
+
+Board Tile Entity
+
+================================================*/
+
+(function(){ 'use strict';
+
+g.BoardTile = function( opt ) {
+  this.parentState = opt.parentState;
+  this.parentGroup = opt.parentGroup;
+  this.col = opt.col;
+  this.row = opt.row;
+  this.x = opt.x;
+  this.y = opt.y;
+  this.z = 0;
+  this.w = opt.w;
+  this.h = opt.h;
+  this.elem = document.createElement( 'div' );
+  this.elem.style.position = 'absolute';
+  this.elem.className = 'tile';
+  this.parentState.stageElem.appendChild( this.elem );
+  this.classes = {
+    pressed: 0,
+    path: 0,
+    up: 0,
+    down: 0,
+    left: 0,
+    right: 0
+  }
+  this.updateDimensions();
+};
 
 
 
