@@ -314,7 +314,30 @@ g.BoardTile = function( opt ) {
     this.classes.path = 0;
   }
 };
+            g.BoardTile.prototype.updateDimensions = function() {
+  this.x = this.col * this.parentState.tileWidth;
+  this.y = this.row * this.parentState.tileHeight;
+  this.w = this.parentState.tileWidth - this.parentState.spacing;
+  this.h = this.parentState.tileHeight - this.parentState.spacing;
+  this.elem.style.left = this.x + 'px';
+  this.elem.style.top = this.y + 'px';
+  this.elem.style.width = this.w + 'px';
+  this.elem.style.height = this.h + 'px';
+};
 
+g.BoardTile.prototype.render = function() {
+  var classString = '';
+  for( var k in this.classes ) {
+    if( this.classes[ k ] ) {
+      classString += k + ' ';
+    }
+  }
+  this.elem.className = 'tile ' + classString;
+};
+
+})();
+
+            
 
 
             
