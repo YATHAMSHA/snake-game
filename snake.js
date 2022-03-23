@@ -359,7 +359,31 @@ g.SnakeTile = function( opt ) {
   this.elem.style.position = 'absolute';
   this.parentState.stageElem.appendChild( this.elem );
 };
-            
+     
+            g.SnakeTile.prototype.update = function( i ) {
+  this.x = this.col * this.parentState.tileWidth;
+  this.y = this.row * this.parentState.tileHeight;
+  if( i == 0 ) {
+    this.color = '#fff';
+    this.blur = this.parentState.dimAvg * 0.03 + Math.sin( this.parentState.time.elapsed / 200 ) * this.parentState.dimAvg * 0.015;
+    if( this.parentState.snake.dir == 'n' ) {
+      this.borderRadius = this.borderRadiusAmount + '% ' + this.borderRadiusAmount + '% 0 0';
+    } else if( this.parentState.snake.dir == 's' ) {
+      this.borderRadius = '0 0 ' + this.borderRadiusAmount + '% ' + this.borderRadiusAmount + '%';
+    } else if( this.parentState.snake.dir == 'e' ) {
+      this.borderRadius = '0 ' + this.borderRadiusAmount + '% ' + this.borderRadiusAmount + '% 0';
+    } else if( this.parentState.snake.dir == 'w' ) {
+      this.borderRadius = this.borderRadiusAmount + '% 0 0 ' + this.borderRadiusAmount + '%';
+    }
+  } else {
+    this.color = '#fff';
+    this.blur = 0;
+    this.borderRadius = '0';
+  }
+  this.alpha = 1 - ( i / this.parentState.snake.tiles.length ) * 0.6;
+  this.rotation = ( this.parentState.snake.justAteTick / this.parentState.snake.justAteTickMax ) * 90;
+  this.scale = 1 + ( this.parentState.snake.justAteTick / this.parentState.snake.justAteTickMax ) * 1;
+};
 
 
             
