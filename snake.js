@@ -385,5 +385,21 @@ g.SnakeTile = function( opt ) {
   this.scale = 1 + ( this.parentState.snake.justAteTick / this.parentState.snake.justAteTickMax ) * 1;
 };
 
+            g.SnakeTile.prototype.updateDimensions = function() {
+  this.w = this.parentState.tileWidth - this.parentState.spacing;
+  this.h = this.parentState.tileHeight - this.parentState.spacing;
+};
+
+g.SnakeTile.prototype.render = function( i ) {
+  this.elem.style.left = this.x + 'px';
+  this.elem.style.top = this.y + 'px';
+  this.elem.style.width = this.w + 'px';
+  this.elem.style.height = this.h + 'px';
+  this.elem.style.backgroundColor = 'rgba(255, 255, 255, ' + this.alpha + ')';
+  this.elem.style.boxShadow = '0 0 ' + this.blur + 'px #fff';
+  this.elem.style.borderRadius = this.borderRadius;
+};
+
+})();
 
             
