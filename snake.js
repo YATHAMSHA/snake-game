@@ -402,4 +402,26 @@ g.SnakeTile.prototype.render = function( i ) {
 
 })();
 
+
+(function(){ 'use strict';
+
+g.FoodTile = function( opt ) {
+  this.parentState = opt.parentState;
+  this.parentGroup = opt.parentGroup;
+  this.col = opt.col;
+  this.row = opt.row;
+  this.x = opt.x;
+  this.y = opt.y;
+  this.w = opt.w;
+  this.h = opt.h;
+  this.blur = 0;
+  this.scale = 1;
+  this.hue = 100;
+  this.opacity = 0;
+  this.elem = document.createElement( 'div' );
+  this.elem.style.position = 'absolute';
+  this.parentState.stageElem.appendChild( this.elem );
+};
+
+
             
