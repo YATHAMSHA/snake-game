@@ -422,6 +422,23 @@ g.FoodTile = function( opt ) {
   this.elem.style.position = 'absolute';
   this.parentState.stageElem.appendChild( this.elem );
 };
+            g.FoodTile.prototype.update = function() {
+  this.x = this.col * this.parentState.tileWidth;
+  this.y = this.row * this.parentState.tileHeight;
+  this.blur = this.parentState.dimAvg * 0.03 + Math.sin( this.parentState.time.elapsed / 200 ) * this.parentState.dimAvg * 0.015;
+  this.scale = 0.8 + Math.sin( this.parentState.time.elapsed / 200 ) * 0.2;
+
+  if( this.parentState.food.birthTick || this.parentState.food.deathTick ) {
+    if( this.parentState.food.birthTick ) {
+      this.opacity = 1 - ( this.parentState.food.birthTick / 1 ) * 1;
+    } else {
+      this.opacity = ( this.parentState.food.deathTick / 1 ) * 1;
+    }
+  } else {
+    this.opacity = 1;
+  }
+};
+
 
 
             
