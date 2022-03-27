@@ -438,6 +438,24 @@ g.FoodTile = function( opt ) {
     this.opacity = 1;
   }
 };
+            
+            g.FoodTile.prototype.updateDimensions = function() {
+  this.w = this.parentState.tileWidth - this.parentState.spacing;
+  this.h = this.parentState.tileHeight - this.parentState.spacing;
+};
+
+g.FoodTile.prototype.render = function() {
+  this.elem.style.left = this.x + 'px';
+  this.elem.style.top = this.y + 'px';
+  this.elem.style.width = this.w + 'px';
+  this.elem.style.height = this.h + 'px';
+  this.elem.style[ 'transform' ] = 'translateZ(0) scale(' + this.scale + ')';
+  this.elem.style.backgroundColor = 'hsla(' + this.hue + ', 100%, 60%, 1)';
+  this.elem.style.boxShadow = '0 0 ' + this.blur + 'px hsla(' + this.hue + ', 100%, 60%, 1)';
+  this.elem.style.opacity = this.opacity;
+};
+
+})();
 
 
 
