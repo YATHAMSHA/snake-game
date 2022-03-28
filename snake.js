@@ -458,5 +458,24 @@ g.FoodTile.prototype.render = function() {
 })();
 
 
+(function(){ 'use strict';
+
+g.Snake = function( opt ) {
+  this.parentState = opt.parentState;
+  this.dir = 'e',
+  this.currDir = this.dir;
+  this.tiles = [];
+  for( var i = 0; i < 5; i++ ) {
+    this.tiles.push( new g.SnakeTile({
+      parentState: this.parentState,
+      parentGroup: this.tiles,
+      col: 8 - i,
+      row: 3,
+      x: ( 8 - i ) * opt.parentState.tileWidth,
+      y: 3 * opt.parentState.tileHeight,
+      w: opt.parentState.tileWidth - opt.parentState.spacing,
+      h: opt.parentState.tileHeight - opt.parentState.spacing
+    }));
+  }
 
             
