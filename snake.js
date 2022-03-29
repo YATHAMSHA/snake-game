@@ -478,4 +478,28 @@ g.Snake = function( opt ) {
     }));
   }
 
+   this.last = 0;
+  this.updateTick = 10;
+  this.updateTickMax = this.updateTick;
+  this.updateTickLimit = 3;
+  this.updateTickChange = 0.2;
+  this.deathFlag = 0;
+  this.justAteTick = 0;
+  this.justAteTickMax = 1;
+  this.justAteTickChange = 0.05;
+
+  // sync data grid of the play state
+  var i = this.tiles.length;
+
+  while( i-- ) {
+    this.parentState.grid.set( this.tiles[ i ].col, this.tiles[ i ].row, 'snake' );
+  }
+};
+
+g.Snake.prototype.updateDimensions = function() {
+  var i = this.tiles.length;
+  while( i-- ) {
+    this.tiles[ i ].updateDimensions();
+  }
+};
             
