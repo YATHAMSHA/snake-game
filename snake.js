@@ -502,4 +502,22 @@ g.Snake.prototype.updateDimensions = function() {
     this.tiles[ i ].updateDimensions();
   }
 };
+            g.Snake.prototype.update = function() {
+  if( this.parentState.keys.up ) {
+    if( this.dir != 's' && this.dir != 'n' && this.currDir != 's' && this.currDir != 'n' ) {
+      this.dir = 'n';
+    }
+  } else if( this.parentState.keys.down) {
+    if( this.dir != 'n' && this.dir != 's' && this.currDir != 'n' && this.currDir != 's' ) {
+      this.dir = 's';
+    }
+  } else if( this.parentState.keys.right ) {
+    if( this.dir != 'w' && this.dir != 'e' && this.currDir != 'w' && this.currDir != 'e' ) {
+      this.dir = 'e';
+    }
+  } else if( this.parentState.keys.left ) {
+    if( this.dir != 'e' && this.dir != 'w' && this.currDir != 'e' && this.currDir != 'w' ) {
+      this.dir = 'w';
+    }
+  }
             
