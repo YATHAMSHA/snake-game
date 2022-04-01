@@ -520,4 +520,27 @@ g.Snake.prototype.updateDimensions = function() {
       this.dir = 'w';
     }
   }
+              
+          this.parentState.keys.up = 0;
+  this.parentState.keys.down = 0;
+  this.parentState.keys.right = 0;
+  this.parentState.keys.left = 0;
+
+  this.updateTick += this.parentState.time.ndelta;
+  if( this.updateTick >= this.updateTickMax ) {
+    this.updateTick = ( this.updateTick - this.updateTickMax );
+    this.tiles.unshift( new g.SnakeTile({
+      parentState: this.parentState,
+      parentGroup: this.tiles,
+      col: this.tiles[ 0 ].col,
+      row: this.tiles[ 0 ].row,
+      x: this.tiles[ 0 ].col * this.parentState.tileWidth,
+      y: this.tiles[ 0 ].row * this.parentState.tileHeight,
+      w: this.parentState.tileWidth - this.parentState.spacing,
+      h: this.parentState.tileHeight - this.parentState.spacing
+    }));
+    this.last = this.tiles.pop();
+    this.parentState.stageElem.removeChild( this.last.elem );
+
+    this.parentState.boardTiles.collection[ this.last.col + ( this.last.row * this.parentState.cols ) ].classes.pressed = 2;    
             
