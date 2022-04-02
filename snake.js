@@ -544,3 +544,23 @@ g.Snake.prototype.updateDimensions = function() {
 
     this.parentState.boardTiles.collection[ this.last.col + ( this.last.row * this.parentState.cols ) ].classes.pressed = 2;    
             
+var i = this.tiles.length;
+
+    while( i-- ) {
+      this.parentState.grid.set( this.tiles[ i ].col, this.tiles[ i ].row, 'snake' );
+    }
+    this.parentState.grid.set( this.last.col, this.last.row, 'empty' );
+    
+    if ( this.dir == 'n' ) {
+      this.currDir = 'n';
+      this.tiles[ 0 ].row -= 1;
+    } else if( this.dir == 's' ) {
+      this.currDir = 's';
+      this.tiles[ 0 ].row += 1;
+    } else if( this.dir == 'w' ) {
+      this.currDir = 'w';
+      this.tiles[ 0 ].col -= 1;
+    } else if( this.dir == 'e' ) {
+      this.currDir = 'e';
+      this.tiles[ 0 ].col += 1;
+    }
