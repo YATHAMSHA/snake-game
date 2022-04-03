@@ -564,3 +564,25 @@ var i = this.tiles.length;
       this.currDir = 'e';
       this.tiles[ 0 ].col += 1;
     }
+     this.wallFlag = false;
+    if( this.tiles[ 0 ].col >= this.parentState.cols ) {
+      this.tiles[ 0 ].col = 0;
+      this.wallFlag = true;
+    }
+    if( this.tiles[ 0 ].col < 0 ) {
+      this.tiles[ 0 ].col = this.parentState.cols - 1;
+      this.wallFlag = true;
+    }
+    if( this.tiles[ 0 ].row >= this.parentState.rows ) {
+      this.tiles[ 0 ].row = 0;
+      this.wallFlag = true;
+    }
+    if( this.tiles[ 0 ].row < 0 ) {
+      this.tiles[ 0 ].row = this.parentState.rows - 1;
+      this.wallFlag = true;
+    }
+    if( this.parentState.grid.get( this.tiles[ 0 ].col, this.tiles[ 0 ].row ) == 'snake' ) {
+      this.deathFlag = 1;
+      clearTimeout( this.foodCreateTimeout );
+    }
+    
