@@ -586,3 +586,34 @@ var i = this.tiles.length;
       clearTimeout( this.foodCreateTimeout );
     }
     
+    
+    if( this.parentState.grid.get( this.tiles[ 0 ].col, this.tiles[ 0 ].row ) == 'food' ) {
+      this.tiles.push( new g.SnakeTile({
+        parentState: this.parentState,
+        parentGroup: this.tiles,
+        col: this.last.col,
+        row: this.last.row,
+        x: this.last.col * this.parentState.tileWidth,
+        y: this.last.row * this.parentState.tileHeight,
+        w: this.parentState.tileWidth - this.parentState.spacing,
+        h: this.parentState.tileHeight - this.parentState.spacing
+      }));
+      if( this.updateTickMax - this.updateTickChange > this.updateTickLimit ) {
+        this.updateTickMax -= this.updateTickChange;
+      }
+      this.parentState.score++;
+      this.parentState.scoreElem.innerHTML = this.parentState.score;
+      this.justAteTick = this.justAteTickMax;
+
+      this.parentState.food.eaten = 1;
+      this.parentState.stageElem.removeChild( this.parentState.food.tile.elem );
+
+      var _this = this;
+      
+      this.foodCreateTimeout = setTimeout( function() {
+        _this.parentState.food = new g.Food({
+          parentState: _this.parentState
+        });
+      }, 300);
+    }
+    
