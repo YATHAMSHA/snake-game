@@ -617,3 +617,20 @@ var i = this.tiles.length;
       }, 300);
     }
     
+    if( this.deathFlag ) {
+      g.setState( 'play' );
+    }
+  }
+              
+              var i = this.tiles.length;
+  while( i-- ) {
+    this.tiles[ i ].update( i );
+  }
+
+  if( this.justAteTick > 0 ) {
+    this.justAteTick -= this.justAteTickChange;
+  } else if( this.justAteTick < 0 ) {
+    this.justAteTick = 0;
+  }
+};
+    
