@@ -633,4 +633,14 @@ var i = this.tiles.length;
     this.justAteTick = 0;
   }
 };
+g.Snake.prototype.render = function() {
+  // render individual snake tiles
+  var i = this.tiles.length;
+  while( i-- ) {
+    this.tiles[ i ].render( i );
+  }
+};
+
+})();
+            
     
