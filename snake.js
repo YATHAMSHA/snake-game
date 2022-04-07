@@ -642,5 +642,25 @@ g.Snake.prototype.render = function() {
 };
 
 })();
-            
+
+            (function(){ 'use strict';
+
+g.Food = function( opt ) {
+  this.parentState = opt.parentState;
+  this.tile = new g.FoodTile({
+    parentState: this.parentState,
+    col: 0,
+    row: 0,
+    x: 0,
+    y: 0,
+    w: opt.parentState.tileWidth - opt.parentState.spacing,
+    h: opt.parentState.tileHeight - opt.parentState.spacing
+  });
+  this.reset();
+  this.eaten = 0;
+  this.birthTick = 1;
+  this.deathTick = 0;
+  this.birthTickChange = 0.025;
+  this.deathTickChange = 0.05;
+};
     
