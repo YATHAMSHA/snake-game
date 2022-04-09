@@ -683,3 +683,24 @@ g.Food = function( opt ) {
   this.birthTickChange = 0.025;
   this.deathTickChange = 0.05;
 };
+
+                g.Food.prototype.updateDimensions = function() {
+  this.tile.updateDimensions();
+};
+
+g.Food.prototype.update = function() {
+  this.tile.update();
+
+  if( this.birthTick > 0 ) {
+    this.birthTick -= this.birthTickChange;
+  } else if( this.birthTick < 0 ) {
+    this.birthTick = 0;
+  }
+  this.parentState.grid.set( this.tile.col, this.tile.row, 'food' );
+};
+
+g.Food.prototype.render = function() {
+  this.tile.render();
+};
+
+})();
