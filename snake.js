@@ -704,3 +704,43 @@ g.Food.prototype.render = function() {
 };
 
 })();
+                        
+                        (function(){ 'use strict';
+
+function StatePlay() {
+  this.name = 'play';
+}
+
+StatePlay.prototype.init = function() {
+  this.scoreElem = document.querySelector( '.score' );
+  this.stageElem = document.querySelector( '.stage' );
+  this.dimLong = 28;
+  this.dimShort = 16;
+  this.padding = 0.25;
+  this.boardTiles = new g.Group();
+  this.keys = {};
+  this.foodCreateTimeout = null;
+  this.score = 0;
+  this.scoreElem.innerHTML = this.score;
+  this.time = new g.Time();
+  this.getDimensions();
+  if( this.winWidth < this.winHeight ) {
+    this.rows = this.dimLong;
+    this.cols = this.dimShort;
+  } else {
+    this.rows = this.dimShort;
+    this.cols = this.dimLong;
+  }
+  this.spacing = 1;
+  this.grid = new g.Grid( this.cols, this.rows );
+  this.resize();
+  this.createBoardTiles();
+  this.bindEvents();
+  this.snake = new g.Snake({
+    parentState: this
+  });
+  this.food = new g.Food({
+    parentState: this
+  });
+};
+
