@@ -744,3 +744,30 @@ StatePlay.prototype.init = function() {
   });
 };
 
+                                    StatePlay.prototype.getDimensions = function() {
+  this.winWidth = window.innerWidth;
+  this.winHeight = window.innerHeight;
+  this.activeWidth = this.winWidth - ( this.winWidth * this.padding );
+  this.activeHeight = this.winHeight - ( this.winHeight * this.padding );
+};
+
+StatePlay.prototype.resize = function() {
+  var _this = g.currentState();
+
+  _this.getDimensions();
+
+  _this.stageRatio = _this.rows / _this.cols;
+
+  if( _this.activeWidth > _this.activeHeight / _this.stageRatio ) {
+    _this.stageHeight = _this.activeHeight;
+    _this.stageElem.style.height = _this.stageHeight + 'px';
+    _this.stageWidth = Math.floor( _this.stageHeight /_this.stageRatio );
+    _this.stageElem.style.width = _this.stageWidth + 'px';
+  } else {
+    _this.stageWidth = _this.activeWidth;
+    _this.stageElem.style.width = _this.stageWidth + 'px';
+    _this.stageHeight = Math.floor( _this.stageWidth * _this.stageRatio );
+    _this.stageElem.style.height = _this.stageHeight + 'px';
+  }
+
+                                    
