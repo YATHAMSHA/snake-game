@@ -770,4 +770,31 @@ StatePlay.prototype.resize = function() {
     _this.stageElem.style.height = _this.stageHeight + 'px';
   }
 
-                                    
+ _this.tileWidth = ~~( _this.stageWidth / _this.cols );
+  _this.tileHeight = ~~( _this.stageHeight / _this.rows );
+  _this.dimAvg = ( _this.activeWidth + _this.activeHeight ) / 2;
+  _this.spacing = Math.max( 1, ~~( _this.dimAvg * 0.0025 ) );
+
+  _this.stageElem.style.marginTop = ( -_this.stageElem.offsetHeight / 2 ) + _this.headerHeight / 2 + 'px';
+
+  _this.boardTiles.each( 'updateDimensions' );
+  _this.snake !== undefined && _this.snake.updateDimensions();
+  _this.food !== undefined && _this.food.updateDimensions();
+};
+
+StatePlay.prototype.createBoardTiles = function() {
+  for( var y = 0; y < this.rows; y++ ) {
+    for( var x = 0; x < this.cols; x++ ) {
+      this.boardTiles.add( new g.BoardTile({
+        parentState: this,
+        parentGroup: this.boardTiles,
+        col: x,
+        row: y,
+        x: x * this.tileWidth,
+        y: y * this.tileHeight,
+        w: this.tileWidth - this.spacing,
+        h: this.tileHeight - this.spacing
+      }));
+    }
+  }
+};                                   
