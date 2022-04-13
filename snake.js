@@ -798,3 +798,72 @@ StatePlay.prototype.createBoardTiles = function() {
     }
   }
 };                                   
+
+StatePlay.prototype.upOn = function() { g.currentState().keys.up = 1; }
+StatePlay.prototype.downOn = function() { g.currentState().keys.down = 1; }
+StatePlay.prototype.rightOn = function() { g.currentState().keys.right = 1; }
+StatePlay.prototype.leftOn = function() { g.currentState().keys.left = 1; }
+StatePlay.prototype.upOff = function() { g.currentState().keys.up = 0; }
+StatePlay.prototype.downOff = function() { g.currentState().keys.down = 0; }
+StatePlay.prototype.rightOff = function() { g.currentState().keys.right = 0; }
+StatePlay.prototype.leftOff = function() { g.currentState().keys.left = 0; }
+
+StatePlay.prototype.keydown = function( e ) {
+  e.preventDefault();
+  var e = ( e.keyCode ? e.keyCode : e.which ),
+    _this = g.currentState();
+  if( e === 38 || e === 87 ) { _this.upOn(); }
+  if( e === 39 || e === 68 ) { _this.rightOn(); }
+  if( e === 40 || e === 83 ) { _this.downOn(); }
+  if( e === 37 || e === 65 ) { _this.leftOn(); }
+};
+
+StatePlay.prototype.bindEvents = function() {
+  var _this = g.currentState();
+  window.addEventListener( 'keydown', _this.keydown, false );
+  window.addEventListener( 'resize', _this.resize, false );
+};
+
+StatePlay.prototype.step = function() {
+  this.boardTiles.each( 'update' );
+  this.boardTiles.each( 'render' );
+  this.snake.update();
+  this.snake.render();
+  this.food.update();
+  this.food.render();
+  this.time.update();
+};
+
+StatePlay.prototype.exit = function() {
+  window.removeEventListener( 'keydown', this.keydown, false );
+  window.removeEventListener( 'resize', this.resize, false );
+  this.stageElem.innerHTML = '';
+  this.grid.tiles = null;
+  this.time = null;
+};
+
+g.addState( new StatePlay() );
+
+})();
+(function(){ 'use strict';
+
+g.config = {
+  title: 'Snakely',
+  debug: window.location.hash == '#debug' ? 1 : 0,
+  state: 'play'
+};
+
+g.setState( g.config.state );
+
+g.time = new g.Time();
+
+g.step = function() {
+  requestAnimationFrame( g.step );
+  g.states[ g.state ].step();
+  g.time.update();
+};
+
+window.addEventListener( 'load', g.step, false );
+
+})();
+                                    
